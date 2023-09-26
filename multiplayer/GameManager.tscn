@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://bpfn1j00wnkao"]
+
+[ext_resource type="Script" path="res://multiplayer/GameManager.gd" id="1_bhh3s"]
+
+[node name="GameManager" type="Node"]
+script = ExtResource("1_bhh3s")
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://multiplayer/player_info.tscn")
+spawn_path = NodePath("../players")
+
+[node name="players" type="Node" parent="."]
+
+[connection signal="child_exiting_tree" from="players" to="." method="_on_players_child_exiting_tree"]

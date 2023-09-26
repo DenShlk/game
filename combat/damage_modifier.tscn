@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://c4auwof6j64gb"]
+
+[node name="damage_modifier" type="Node2D"]

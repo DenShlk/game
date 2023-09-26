@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://dr3eba0f1qj2x"]
+
+[ext_resource type="Script" path="res://combat/static_weapon.gd" id="1_rbroa"]
+
+[node name="static_weapon" type="Area2D"]
+collision_layer = 0
+script = ExtResource("1_rbroa")
+
+[connection signal="body_entered" from="." to="." method="_on_hit"]

@@ -1,0 +1,97 @@
+[gd_scene load_steps=3 format=3 uid="uid://o5q3pflw651y"]
+
+[ext_resource type="Script" path="res://multiplayer/lobby.gd" id="1_dvwua"]
+[ext_resource type="PackedScene" uid="uid://dknwv2777xin5" path="res://levels/starting_area.tscn" id="2_7kp4r"]
+
+[node name="lobby" type="Node2D"]
+script = ExtResource("1_dvwua")
+start_level = ExtResource("2_7kp4r")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ui" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/ui"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/ui/CenterContainer"]
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer/ui/CenterContainer/VBoxContainer"]
+layout_mode = 2
+columns = 2
+
+[node name="Label4" type="Label" parent="CanvasLayer/ui/CenterContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+text = "name"
+
+[node name="name" type="LineEdit" parent="CanvasLayer/ui/CenterContainer/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "me"
+
+[node name="Label" type="Label" parent="CanvasLayer/ui/CenterContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+text = "ip"
+
+[node name="ip" type="LineEdit" parent="CanvasLayer/ui/CenterContainer/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "127.0.0.1"
+
+[node name="Label2" type="Label" parent="CanvasLayer/ui/CenterContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+text = "port
+"
+
+[node name="port" type="SpinBox" parent="CanvasLayer/ui/CenterContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+min_value = 1.0
+max_value = 10000.0
+value = 8765.0
+rounded = true
+
+[node name="Label3" type="Label" parent="CanvasLayer/ui/CenterContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+text = "seed"
+
+[node name="seed" type="SpinBox" parent="CanvasLayer/ui/CenterContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+min_value = -1.0
+max_value = 1.0
+value = -1.0
+rounded = true
+allow_greater = true
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/ui/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 25
+
+[node name="host" type="Button" parent="CanvasLayer/ui/CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "host"
+
+[node name="join" type="Button" parent="CanvasLayer/ui/CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "join
+"
+
+[node name="start_game" type="Button" parent="CanvasLayer/ui/CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "start"
+
+[connection signal="pressed" from="CanvasLayer/ui/CenterContainer/VBoxContainer/host" to="." method="_on_host_button_down"]
+[connection signal="pressed" from="CanvasLayer/ui/CenterContainer/VBoxContainer/join" to="." method="_on_join_button_down"]
+[connection signal="pressed" from="CanvasLayer/ui/CenterContainer/VBoxContainer/start_game" to="." method="_on_start_game_button_down"]

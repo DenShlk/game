@@ -1,0 +1,44 @@
+[gd_scene load_steps=9 format=3 uid="uid://dknwv2777xin5"]
+
+[ext_resource type="Script" path="res://levels/base_level.gd" id="1_nosxv"]
+[ext_resource type="Script" path="res://levels/floor.gd" id="2_exwuw"]
+[ext_resource type="Texture2D" uid="uid://ceejs4pn8c48" path="res://sprites/grass-tile.png" id="3_116ih"]
+[ext_resource type="Script" path="res://combat/force_registry.gd" id="4_6icob"]
+[ext_resource type="PackedScene" uid="uid://1stgfyguwfsc" path="res://levels/blocks/tablet/tablet.tscn" id="5_imirh"]
+[ext_resource type="PackedScene" uid="uid://dc6by5lh1gfk0" path="res://levels/blocks/portal.tscn" id="6_n1uli"]
+[ext_resource type="PackedScene" uid="uid://u8ps38aqosvs" path="res://levels/template_1.tscn" id="7_00ov5"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_vso0h"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/sync = false
+properties/0/watch = true
+
+[node name="starting_area" type="Node2D"]
+script = ExtResource("1_nosxv")
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://player/player.tscn")
+spawn_path = NodePath("../ForceRegistry")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_vso0h")
+
+[node name="Floor" type="Node2D" parent="."]
+script = ExtResource("2_exwuw")
+size = 64
+sprites = Array[Texture2D]([ExtResource("3_116ih")])
+
+[node name="player_spawn" type="Node2D" parent="."]
+position = Vector2(320, 180)
+
+[node name="tablet" parent="." instance=ExtResource("5_imirh")]
+position = Vector2(420, 180)
+text = "Proceed on your own risk"
+
+[node name="portal" parent="." instance=ExtResource("6_n1uli")]
+position = Vector2(497, 183)
+destination_level = ExtResource("7_00ov5")
+
+[node name="ForceRegistry" type="Node2D" parent="."]
+script = ExtResource("4_6icob")

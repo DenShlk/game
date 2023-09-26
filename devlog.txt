@@ -1,0 +1,109 @@
+
+
+
+
+Where to detect hits?
+
+1) entity has list of effects currently affecting it and amount of HP
+2) weapon has list of effects it applies
+3) effect is not defined... how should it interact with entity it is attached to?
+4) effect has priority, and they are sorted in priority order?
+5) 
+
+
+should weapons have effects (which affect the weapon itself) - may be
+
+so when weapon hits entity:
+1) we make damage object - {base: 10, modifier: +30%, effects: []}
+2) pass (or rather drag) it trough character effects, then weapon effects
+3) send damage to entity
+4) entity passes it through its effects (don't touch weapon i guess)
+5) finally, damage is applied, effects are added to entity's list	
+
+this is kinda done, but i never tested effects:)
+
+
+force registry:
+1) you can have multiple forces
+2) you are allies if you have any force in common
+3) if you have no force, you are a teapot, not an enemy,.,,.,.,
+
+
+LEVELS
+1) how should they work???
+2) lets generate!
+3) ok, i pass list enemies, than their counts
+
+
+multiplayer!
+1) it is quite easy to set up, but i suspect it will work badly by default
+2) may be need some more gameplay to actually test it..
+
+force registry is autoload (Todo) or not? you do not need in main menu... <- for now, not
+need to separate input from movement? or may be it is fine (cheating doesn't exist)
+
+need to pass player id to player node... but i tried to remove multiplayer logic from level loader (it is there anyway now).
+
+how do i set seed??? i need to sync it! and i mustn't generate level before it is set... - fixed
+
+
+bugs: there is a boar that does nothing and cannot be damaged + only one player syncs (always one on the right!)...
+
+I thought of syncing boar destination point, not position. 
+However it won't work, because if destination is not immediatly synced, position will be off and error will grow with time.
+It can be preferable to use low-freq syncs for both destination and position, calculating current position on client.
+Simply syncing position will do for now, but i thoght that this was valuable example.
+
+forces should be calculated only on server, actually, no you need to be able to read/check enemies from client.
+NOTE: think about client/server logic separation main purpose as working synchronization.
+
+All is looking good!
+one question: how do i spawn interconnected entities in multiplayer, and use m.synchronisers (the seem to not work if the thing isn't spawned with m.spawner)?
+ok so i figured it out!
+1) have m.spawner in character
+2) save character weapon in GameManager.Players
+3) spawn character on server - it spawns everywhere
+4) spawn weapon (you know which one) for this character on server - it spawns everywhere
+welll... i was wrong, remember to disable things that can override syncs!
+
+I want to make level system. Where do i start?
+I guess i want to make walkable 'dungeon'. 
+so you can go to portal/door/whatever, teleport to level, fight with mobs, collect rewards, go to next chamber.
+todo list:
+	+ level system
+	+ doors (portals actually) to teleport between levels
+	(1/2) couple of levels to go through
+	(ui ready) ui for health and money + storing it in Players dict
+	(1/3) level logic: spawn player, wait until they or all foes are dead, teleport back or give rewards, let to go to next level
+	- more level logic: spawn waves of monsters
+	- player death logic
+	- rewards: health/money to begin with, than weapon modifiers
+	- how to sync force registry??? (spawners go brr, but should they?)
+
+I understood something! If godot devs did a decent job, m.spawners are ultimate thing!
+You can store players data not in dict, but simply as children of auto loaded node, synced by m.spawner and m.synchronizers!
+how new player is added:
+	1) they add playerinfo to GameManager - everybody knows he exists
+	2) they spawn in lobby and do they thing
+	3) something needs to spawn player body for them when they enter playable areas...
+	
+need to think of the global scene structure
+root:
+	GameManager (or meta storage?):
+		PlayerInfos...
+	LevelLoader (or level manager?):
+		Level1:
+			Terrain, Obstacles
+			Interactables
+			ForceRegistry:
+				CombatCharacters...
+		Level2:... (on server, clients may render only their levels (in future?))
+	[May be] LevelArchive (name -> scene path)
+
+how portal works:
+player activates it -> call is sent to server
+portal knows it's current level, it says it to remove character from tree
+portal somehow creates level node (or finds it in existing ones), than sends it to LevelLoader
+portal calls LevelLoader.MovePlayer(player, level)!
+
+probably moving player is optimization, we need to create it from the botttom up.

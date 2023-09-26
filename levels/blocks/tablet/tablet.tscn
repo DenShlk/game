@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://1stgfyguwfsc"]
+
+[ext_resource type="Script" path="res://levels/blocks/tablet/tablet.gd" id="1_iim32"]
+[ext_resource type="Texture2D" uid="uid://0uhkrjcgs03x" path="res://sprites/tablet.png" id="2_dy1tn"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_aaucp"]
+radius = 30.4138
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xh6cs"]
+size = Vector2(20, 25)
+
+[node name="tablet" type="Node2D" node_paths=PackedStringArray("interaction_area")]
+script = ExtResource("1_iim32")
+text = null
+interaction_area = NodePath("Area2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_dy1tn")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_aaucp")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, 2.5)
+shape = SubResource("RectangleShape2D_xh6cs")

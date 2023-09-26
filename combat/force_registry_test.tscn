@@ -1,0 +1,71 @@
+[gd_scene load_steps=4 format=3 uid="uid://de1j84dy6webs"]
+
+[ext_resource type="Script" path="res://combat/force_registry.gd" id="1_856dl"]
+[ext_resource type="PackedScene" uid="uid://6ivgsuhhbtug" path="res://combat/boar.tscn" id="2_b0vtj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k73a6"]
+size = Vector2(651, 18)
+
+[node name="ForceRegistry" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_856dl")
+
+[node name="Boar" parent="." instance=ExtResource("2_b0vtj")]
+position = Vector2(128, 179)
+forces = Array[String](["wild_1"])
+
+[node name="Boar2" parent="." instance=ExtResource("2_b0vtj")]
+position = Vector2(123, 34)
+forces = Array[String](["wild_1"])
+
+[node name="Boar3" parent="." instance=ExtResource("2_b0vtj")]
+position = Vector2(135, 322)
+forces = Array[String](["wild_1"])
+
+[node name="Boar4" parent="." instance=ExtResource("2_b0vtj")]
+position = Vector2(134, 259)
+forces = Array[String](["wild_1"])
+
+[node name="Boar5" parent="." instance=ExtResource("2_b0vtj")]
+position = Vector2(127, 105)
+forces = Array[String](["wild_1"])
+
+[node name="Boar6" parent="." instance=ExtResource("2_b0vtj")]
+position = Vector2(464, 253)
+forces = Array[String](["wild_2"])
+
+[node name="Boar7" parent="." instance=ExtResource("2_b0vtj")]
+position = Vector2(453, 75)
+forces = Array[String](["wild_2"])
+
+[node name="Boar8" parent="." instance=ExtResource("2_b0vtj")]
+position = Vector2(457, 196)
+forces = Array[String](["wild_2"])
+
+[node name="Boar9" parent="." instance=ExtResource("2_b0vtj")]
+position = Vector2(465, 309)
+forces = Array[String](["wild_2"])
+
+[node name="Boar10" parent="." instance=ExtResource("2_b0vtj")]
+position = Vector2(452, 138)
+forces = Array[String](["wild_2"])
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(325, 365)
+shape = SubResource("RectangleShape2D_k73a6")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-5, 130)
+rotation = 1.57079
+shape = SubResource("RectangleShape2D_k73a6")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(647, 144)
+rotation = 1.57079
+shape = SubResource("RectangleShape2D_k73a6")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(320, -8)
+shape = SubResource("RectangleShape2D_k73a6")

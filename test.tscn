@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://blb5ddk2erk5c"]
+
+[ext_resource type="Texture2D" uid="uid://ceejs4pn8c48" path="res://sprites/grass-tile.png" id="1_cmsgy"]
+[ext_resource type="PackedScene" uid="uid://1stgfyguwfsc" path="res://levels/blocks/tablet/tablet.tscn" id="2_h7ffo"]
+[ext_resource type="Script" path="res://combat/force_registry.gd" id="3_t23kk"]
+[ext_resource type="PackedScene" uid="uid://6ivgsuhhbtug" path="res://combat/boar.tscn" id="4_o4u66"]
+
+[node name="Grass-tile" type="Sprite2D"]
+position = Vector2(33, 33)
+texture = ExtResource("1_cmsgy")
+
+[node name="tablet" parent="." instance=ExtResource("2_h7ffo")]
+position = Vector2(125, 65)
+
+[node name="ForceRegistry" type="Node2D" parent="."]
+script = ExtResource("3_t23kk")
+
+[node name="Boar2" parent="ForceRegistry" instance=ExtResource("4_o4u66")]
+position = Vector2(14, 80)
+
+[node name="Boar" parent="ForceRegistry" instance=ExtResource("4_o4u66")]

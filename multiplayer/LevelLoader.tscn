@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://d0t0au13gnukd"]
+
+[ext_resource type="Script" path="res://multiplayer/LevelLoader.gd" id="1_geqr7"]
+
+[node name="LevelLoader" type="Node"]
+script = ExtResource("1_geqr7")
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://levels/starting_area.tscn", "res://levels/template_1.tscn")
+spawn_path = NodePath("../levels")
+
+[node name="levels" type="Node" parent="."]
+
+[connection signal="child_entered_tree" from="levels" to="." method="_on_levels_child_entered_tree"]
+[connection signal="child_exiting_tree" from="levels" to="." method="_on_levels_child_exiting_tree"]
