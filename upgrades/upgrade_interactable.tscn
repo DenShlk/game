@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://c383vqywcux21"]
+
+[ext_resource type="Script" path="res://upgrades/upgrade_interactable.gd" id="1_jrcpm"]
+[ext_resource type="Texture2D" uid="uid://845754xa3b02" path="res://sprites/blob.png" id="2_yi7ov"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3clby"]
+radius = 6.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8cw5j"]
+radius = 9.0
+
+[node name="UpgradeInteractable" type="Node2D" node_paths=PackedStringArray("interaction_area")]
+script = ExtResource("1_jrcpm")
+interaction_area = NodePath("Area2D2")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("CircleShape2D_3clby")
+
+[node name="Area2D2" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D2"]
+shape = SubResource("CircleShape2D_8cw5j")
+
+[node name="Blob" type="Sprite2D" parent="."]
+scale = Vector2(0.375, 0.375)
+texture = ExtResource("2_yi7ov")

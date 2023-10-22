@@ -1,0 +1,56 @@
+[gd_scene load_steps=5 format=3 uid="uid://coy31wjh4tose"]
+
+[ext_resource type="Script" path="res://levels/blocks/shop_stand.gd" id="1_xlomy"]
+[ext_resource type="Texture2D" uid="uid://g2nyyo0cb3oc" path="res://sprites/shop-stand.png" id="2_88rss"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5g8ck"]
+radius = 29.0172
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_7ptrw"]
+properties/0/path = NodePath(".:price")
+properties/0/spawn = true
+properties/0/sync = true
+properties/0/watch = true
+
+[node name="ShopStand" type="Node2D" node_paths=PackedStringArray("interaction_area")]
+script = ExtResource("1_xlomy")
+price = null
+interaction_area = NodePath("Sprite/Area2D")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(-1, 6)
+texture = ExtResource("2_88rss")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Sprite"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Sprite/StaticBody2D"]
+polygon = PackedVector2Array(-21, 11, 2, -1, 23, 6, 23, 22, 5, 36, -21, 28)
+
+[node name="Area2D" type="Area2D" parent="Sprite"]
+collision_layer = 0
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/Area2D"]
+position = Vector2(2, 22)
+shape = SubResource("CircleShape2D_5g8ck")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+z_index = 30
+offset_left = -30.0
+offset_top = -33.0
+offset_right = 30.0
+offset_bottom = -11.0
+
+[node name="Label" type="Label" parent="CenterContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.835294, 0, 1)
+theme_override_font_sizes/font_size = 8
+text = "123$"
+vertical_alignment = 1
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://upgrades/presets/damage.tscn", "res://upgrades/healing_heart.tscn", "res://upgrades/heart.tscn")
+spawn_path = NodePath("..")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_7ptrw")

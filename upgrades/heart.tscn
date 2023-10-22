@@ -1,0 +1,83 @@
+[gd_scene load_steps=8 format=3 uid="uid://dubjq3n4e3616"]
+
+[ext_resource type="Script" path="res://upgrades/heart.gd" id="1_wsfqc"]
+[ext_resource type="Texture2D" uid="uid://cmqccdgi2hkvo" path="res://sprites/heart.png" id="2_kjery"]
+
+[sub_resource type="Animation" id="Animation_ulimi"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Heart:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_o45qd"]
+resource_name = "new_animation"
+length = 0.6
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Heart:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2i(0, 0), Vector2i(4, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_s66cg"]
+_data = {
+"RESET": SubResource("Animation_ulimi"),
+"new_animation": SubResource("Animation_o45qd")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ssq7e"]
+radius = 23.0217
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fuia5"]
+radius = 6.57641
+height = 24.9894
+
+[node name="heart" type="Node2D" node_paths=PackedStringArray("interaction_area")]
+script = ExtResource("1_wsfqc")
+interaction_area = NodePath("Area2D")
+
+[node name="Heart" type="Sprite2D" parent="."]
+texture = ExtResource("2_kjery")
+hframes = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "new_animation"
+libraries = {
+"": SubResource("AnimationLibrary_s66cg")
+}
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_ssq7e")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-4, 1)
+rotation = -0.742263
+shape = SubResource("CapsuleShape2D_fuia5")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(4, 2)
+rotation = 0.749263
+shape = SubResource("CapsuleShape2D_fuia5")
