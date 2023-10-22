@@ -13,7 +13,7 @@ script = ExtResource("1_mqfgj")
 [node name="Scenarios" type="Node" parent="."]
 
 [node name="SimpleScenario" parent="Scenarios" instance=ExtResource("2_mgcks")]
-levels = Array[PackedScene]([ExtResource("3_ncmva"), ExtResource("4_8qbqx"), ExtResource("5_xpogb"), ExtResource("4_8qbqx"), ExtResource("4_8qbqx"), ExtResource("6_jxal4")])
+levels = Array[PackedScene]([ExtResource("3_ncmva"), ExtResource("4_8qbqx"), ExtResource("4_8qbqx"), ExtResource("4_8qbqx"), ExtResource("5_xpogb"), ExtResource("6_jxal4")])
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 spawn_path = NodePath("../Scenarios")
