@@ -7,6 +7,8 @@ extends Node2D
 @export var baseDamage: int
 
 func _ready():
+	if character == null && get_parent() is CombatCharacter:
+		character = get_parent()
 	assert(character != null, "no character set")
 	# todo: disable collision shape on clients
 

@@ -26,16 +26,20 @@ func add_level_unless_exists(scene: PackedScene) -> BaseLevel:
 		AddLevel(level)
 	return level
 	
+# currently i'm not sure what will happen if you actually 'move' player from 
+# one level to another. So i recreate them.
 func MovePlayer(node: CombatCharacter, level: BaseLevel):
 	assert(multiplayer.get_unique_id() == 1, "only server is allowed to move characters")
+	if !level.is_node_ready():
+		await level.ready
 	level.add_player(node)
 	
 
 func _on_levels_child_entered_tree(node):
-	if node is BaseLevel and levels.has(node):
-		levels.erase(node)
+	if node is BaseLevel and !levels.has(node):
+		levels.append(node)
 
 
 func _on_levels_child_exiting_tree(node):
-	if node is BaseLevel and !levels.has(node):
-		levels.append(node)
+	if node is BaseLevel and levels.has(node):
+		levels.erase(node)

@@ -19,7 +19,7 @@ func _ready():
 
 func _process(delta):
 	money.text = "%d$" % _player.player_info.money
-	healthbar.max_value = _player.maxHealth
+	healthbar.max_value = _player.player_info.maxHealth
 	healthbar.value = _player.health
-	health_text.text = "%d/%d" % [_player.health, _player.maxHealth]
+	health_text.text = "%d/%d" % [_player.health, _player.player_info.maxHealth]
 	multiplayer_id_text.text = str(get_multiplayer_authority())

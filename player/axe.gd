@@ -6,6 +6,8 @@ extends BaseWeapon
 func _ready():
 	super()
 #	$AnimationTree.active = is_multiplayer_authority()
+	hitbox.disabled = true
+
 
 @rpc("any_peer", "call_local", "unreliable", 4)
 func attack(direction: Vector2):
@@ -18,7 +20,11 @@ func attack(direction: Vector2):
 		"before attack 3":
 			state_machine.travel('attack_3')
 
+
 func _process(delta):
+	if !multiplayer.is_server():
+		return
+	
 	match (state_machine.get_current_node()):
 		"RESET", "before attack 2", "before attack 3":
 			hitbox.disabled = true

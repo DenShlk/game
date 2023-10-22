@@ -1,6 +1,9 @@
 class_name ForceRegistry
 extends Node2D
 
+# oh, boy, can we optimize this
+# but we prefer time to speed
+
 # need to sync:
 # string -> Dict[NodePath, bool] (no set) (no dict typing yet)
 var forces: Dictionary = {}
@@ -9,7 +12,6 @@ var entities: Dictionary = {}
 
 
 # you can register to multiple forces!
-
 func register(who: NodePath, force: String):
 	assert(multiplayer.is_server(), "must be server to edit forces")
 	_register.rpc(who, force)
@@ -25,10 +27,12 @@ func _register(who: NodePath, force: String):
 	else:
 		entities[who][force] = true
 
+
 func unregister(who: NodePath, force: String):
 	assert(multiplayer.is_server(), "must be server to edit forces")
 	_unregister.rpc(who, force)
-	
+
+
 @rpc("authority", "call_local", "reliable", 2)
 func _unregister(who: NodePath, force: String):
 	if not entities.has(who) || not forces.has(force):
@@ -47,10 +51,11 @@ func _unregister(who: NodePath, force: String):
 func is_enemy(you: NodePath, other: NodePath) -> bool:
 	if !entities.has(you) || !entities.has(other):
 		return false
-	var other_allies: Dictionary = entities[other]
-	var allies: Dictionary = entities[you]
+	return _is_enemy(entities[you], entities[other])
 	
-	for a in allies.keys():
+	
+func _is_enemy(your_allies: Dictionary, other_allies: Dictionary):
+	for a in your_allies.keys():
 		if other_allies.has(a):
 			return false
 	return true
@@ -66,4 +71,13 @@ func get_enemies(you: NodePath) -> Array[Dictionary]:
 		
 		enemies.append(forces[f])
 	return enemies
+	
+
+func are_opponents_present():
+	var force_sets: Array = entities.values()
+	for i in range(force_sets.size()):
+		for j in range(i + 1, force_sets.size()):
+			if _is_enemy(force_sets[i], force_sets[j]):
+				return true
+	return false
 	

@@ -1,5 +1,14 @@
+
+Network:
 1: reliable, general important things (game start, game end...)
 2: reliable, important things in combat (send ids, player dead, money)
 3: reliable, misc (kinda) important things: chat, 
 4: unreliable, player inputs
 5: unreliable orderer, health updates
+6: unreliable, vfx
+
+
+Orders of visibility:
+0-10: game objects (physical)
+30-40:in-game ui
+

@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://de1j84dy6webs"]
 
 [ext_resource type="Script" path="res://combat/force_registry.gd" id="1_856dl"]
-[ext_resource type="PackedScene" uid="uid://6ivgsuhhbtug" path="res://combat/boar.tscn" id="2_b0vtj"]
+[ext_resource type="PackedScene" uid="uid://6ivgsuhhbtug" path="res://combat/mobs/boar.tscn" id="2_b0vtj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k73a6"]
 size = Vector2(651, 18)

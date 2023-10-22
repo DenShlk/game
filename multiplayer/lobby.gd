@@ -33,9 +33,10 @@ func connected_to_server():
 	send_player_information.rpc_id(1,
 			multiplayer.get_unique_id(),
 			player_name,
-			100,
-			100,
-			0
+			50,
+			50,
+			150,
+			^"res://player/axe.tscn",
 			)
 	
 	
@@ -53,7 +54,7 @@ var _player_info_node: PackedScene = load("res://multiplayer/player_info.tscn")
 
 
 @rpc("any_peer", "call_local", "reliable", 1)
-func send_player_information(id, nick, finished_with_health, max_health, money):
+func send_player_information(id, nick, finished_with_health, max_health, money, weapon):
 	if multiplayer.is_server():
 		var player := _player_info_node.instantiate() as PlayerInfo
 		player.name = str(id)
@@ -62,6 +63,7 @@ func send_player_information(id, nick, finished_with_health, max_health, money):
 		player.maxHealth = max_health
 		player.nick = nick
 		player.money = money
+		player.weaponPath = weapon
 		GameManager.add_player(player)
 	else:
 		assert(false, "call this only on server")
@@ -69,12 +71,11 @@ func send_player_information(id, nick, finished_with_health, max_health, money):
 @rpc("any_peer", "call_remote", "reliable", 1)
 func StartGame(id: int):
 	if multiplayer.is_server():
-		var level: BaseLevel = LevelLoader.FindLevel(start_level)
-		if level == null:
-			level = start_level.instantiate()
-			LevelLoader.AddLevel(level)
+		var scenario = $"/root/ScenarioManager/Scenarios/SimpleScenario"
+#		var level: BaseLevel = LevelLoader.add_level_unless_exists(start_level)
 		var player: PlayerInfo = GameManager.get_player_info_by_id(id)
-		LevelLoader.MovePlayer(player.create_character(), level)
+#		LevelLoader.MovePlayer(player.create_character(), level)
+		scenario.add_player(player)
 	else:
 		StartGame.rpc_id(1, id)
 	self.hide()
@@ -104,9 +105,10 @@ func _on_host_button_down():
 	send_player_information(
 			multiplayer.get_unique_id(),
 			player_name,
-			100,
-			100,
-			0
+			50,
+			50,
+			1,
+			^"res://player/axe.tscn",
 			)
 	StartGame(multiplayer.get_unique_id())
 

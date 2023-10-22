@@ -6,8 +6,8 @@ extends Node
 # below are methods you can override to do something
 # they are commented to not pass checks
 
-#func receive_damage(d: Damage) -> Damage:
+#func owner_applies_damage(d: Damage) -> Damage:
 #	return null
 #
-#func apply_damage(d: Damage) -> Damage:
+#func owner_applies_damage(d: Damage) -> Damage:
 #	return null

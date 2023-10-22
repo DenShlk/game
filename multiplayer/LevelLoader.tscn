@@ -6,7 +6,7 @@
 script = ExtResource("1_geqr7")
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://levels/starting_area.tscn", "res://levels/template_1.tscn")
+_spawnable_scenes = PackedStringArray("res://levels/starting_area.tscn", "res://levels/template_1.tscn", "res://levels/starting_area_2.tscn", "res://levels/shop_area.tscn", "res://levels/boss_level.tscn")
 spawn_path = NodePath("../levels")
 
 [node name="levels" type="Node" parent="."]

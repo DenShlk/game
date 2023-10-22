@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dknwv2777xin5"]
+[gd_scene load_steps=14 format=3 uid="uid://dknwv2777xin5"]
 
 [ext_resource type="Script" path="res://levels/base_level.gd" id="1_nosxv"]
 [ext_resource type="Script" path="res://levels/floor.gd" id="2_exwuw"]
@@ -7,6 +7,11 @@
 [ext_resource type="PackedScene" uid="uid://1stgfyguwfsc" path="res://levels/blocks/tablet/tablet.tscn" id="5_imirh"]
 [ext_resource type="PackedScene" uid="uid://dc6by5lh1gfk0" path="res://levels/blocks/portal.tscn" id="6_n1uli"]
 [ext_resource type="PackedScene" uid="uid://u8ps38aqosvs" path="res://levels/template_1.tscn" id="7_00ov5"]
+[ext_resource type="PackedScene" uid="uid://bqeem1ts27xn" path="res://levels/shop_area.tscn" id="8_jqvh8"]
+[ext_resource type="PackedScene" uid="uid://c383vqywcux21" path="res://upgrades/upgrade_interactable.tscn" id="8_q3eke"]
+[ext_resource type="PackedScene" uid="uid://bow5ggtpixmu3" path="res://upgrades/damage_bonus.tscn" id="9_amv25"]
+[ext_resource type="PackedScene" uid="uid://dubjq3n4e3616" path="res://levels/blocks/heart.tscn" id="10_ksbx4"]
+[ext_resource type="PackedScene" uid="uid://coy31wjh4tose" path="res://levels/blocks/shop_stand.tscn" id="11_2n7fv"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_vso0h"]
 properties/0/path = NodePath(".:position")
@@ -32,13 +37,30 @@ sprites = Array[Texture2D]([ExtResource("3_116ih")])
 [node name="player_spawn" type="Node2D" parent="."]
 position = Vector2(320, 180)
 
+[node name="ForceRegistry" type="Node2D" parent="."]
+script = ExtResource("4_6icob")
+
 [node name="tablet" parent="." instance=ExtResource("5_imirh")]
-position = Vector2(420, 180)
+position = Vector2(510, 181)
 text = "Proceed on your own risk"
 
 [node name="portal" parent="." instance=ExtResource("6_n1uli")]
-position = Vector2(497, 183)
+position = Vector2(437, 182)
 destination_level = ExtResource("7_00ov5")
+duplicate_level = true
 
-[node name="ForceRegistry" type="Node2D" parent="."]
-script = ExtResource("4_6icob")
+[node name="portal2" parent="." instance=ExtResource("6_n1uli")]
+position = Vector2(297, -50)
+destination_level = ExtResource("8_jqvh8")
+
+[node name="UpgradeInteractable" parent="." instance=ExtResource("8_q3eke")]
+position = Vector2(117, 185)
+upgrade_scene = ExtResource("9_amv25")
+
+[node name="heart" parent="." instance=ExtResource("10_ksbx4")]
+position = Vector2(236, 263)
+
+[node name="shop_stand" parent="." instance=ExtResource("11_2n7fv")]
+position = Vector2(237, 67)
+
+[node name="heart2" parent="shop_stand" instance=ExtResource("10_ksbx4")]

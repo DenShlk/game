@@ -73,12 +73,11 @@ todo list:
 	+ level system
 	+ doors (portals actually) to teleport between levels
 	(1/2) couple of levels to go through
-	(ui ready) ui for health and money + storing it in Players dict
-	(1/3) level logic: spawn player, wait until they or all foes are dead, teleport back or give rewards, let to go to next level
-	- more level logic: spawn waves of monsters
-	- player death logic
-	- rewards: health/money to begin with, than weapon modifiers
-	- how to sync force registry??? (spawners go brr, but should they?)
+	+ ui for health and money + storing it in Players dict
+	+ level logic: spawn player, wait until they or all foes are dead, teleport back or give rewards, let to go to next level
+	(base_level supports it, don't need it at the moment) more level logic: spawn waves of monsters
+	+ player death logic
+	+ rewards: health/money to begin with
 
 I understood something! If godot devs did a decent job, m.spawners are ultimate thing!
 You can store players data not in dict, but simply as children of auto loaded node, synced by m.spawner and m.synchronizers!
@@ -107,3 +106,68 @@ portal somehow creates level node (or finds it in existing ones), than sends it 
 portal calls LevelLoader.MovePlayer(player, level)!
 
 probably moving player is optimization, we need to create it from the botttom up.
+
+how to spawn rewards? i kinda want to generalize it... but who cares
+
+what to do with dead player? 
+I feel like I need to make some goals or there will be too much question i don't like to deal with...
+
+
+Alright, we need a new goal!
+Next step is to have somewhat playable experience... 
+1) have weapon upgrades and visual indicators that they work (like damage numbers!) - done
+2) do not loose multiplayer workability for too long! - lost it with shop :(
+3+-) multiple levels, enemies applying effects (like stun or something)
+4+) shop with upgrades! - done
+
+levels:
+	1) starting area, do nothing
+	2-n) level with boars, spawn random reward
+	random) shop
+	n) boss (guess, who?) GIANT BOOOAAARRR
+	n+1) credits, beautiful music, don't forget 'thank YOU for playing!'
+
+ideas for upgrades:
+	- freeze - simple, really
+	- +dmg +health +money - BASED
+	- fire? with burn damage, bonus points if you get resonance going:)
+	
+what is upgrade?
+Hades: if you take it you have a choice between multiple upgrades, you know their element (their group)
+or: you can see everything about it, and just decide to buy it or not
+1) if you receive upgrade as reward for each level you need to have some choice - good point
+2) we need to make choice of next room insteresting - so making choice between *groups* of upgrades helps
+3) i like hades. 
+
+is upgrade an effect?
+are there effects which should apply to respawned character?
+i guess effects work in battle and upgrades are persistent. 
+
+we need to discuss how to do shadows. I guess I need to add half-transparent 
+color to pallete, and paint them for all sprites.
+
+Apparently not-dynamic objects aren't deleted by m.spawner https://github.com/godotengine/godot/issues/74327
+bugger. Pre-determined shop won't sync for this reason.
+
+How to make scenarios? (Some high level idea of sequence of levels)
+may be make scenario manager? and in level you notify it about level end
+
+I have an idea about a scenario: map is a grid of cells, each cell is a level (with foes and reward)
+you go in it however you want to adjacent cells (some connections can be blocked)
+you need to go to the centre, but you usually want to get as many rewards as possible
+Of course, other players are spawned on the same map, and you can fight if you 
+meet, except center chamber (probably). We also need to protect weaker players somehow...
+I decided to go with my scenarios a bit further, and do not bother with idea above for some time
+
+
+some thoughts:
+	1) i need upgrade interactable to put into shop inventory
+	2) i want to spawn interactable, which 
+	3) yeah i got it... REMINDER: write thoughts down, it helps
+
+TODO: interactable captions (quite simple, really)
+
+ok, effects! let's do frost to begin with
+1) it should be indicated near the health bar
+2) should somehow slow down characters... => we need to make speed_modifier variable to do that
+should it be in character or in each of the things... guess the former because it's so universal

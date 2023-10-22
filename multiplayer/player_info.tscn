@@ -34,4 +34,11 @@ script = ExtResource("1_bprmr")
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_686bh")
 
+[node name="upgrades" type="Node" parent="."]
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+spawn_path = NodePath("../upgrades")
+
 [connection signal="synchronized" from="MultiplayerSynchronizer" to="." method="_on_multiplayer_synchronizer_synchronized"]
+[connection signal="child_entered_tree" from="upgrades" to="." method="_on_upgrades_child_entered_tree"]
+[connection signal="child_exiting_tree" from="upgrades" to="." method="_on_upgrades_child_exiting_tree"]

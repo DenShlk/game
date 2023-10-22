@@ -408,7 +408,7 @@ states/idle/position = Vector2(346.148, 54.6667)
 states/walk/node = SubResource("AnimationNodeAnimation_el6ld")
 states/walk/position = Vector2(493.333, 54.6667)
 transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_h5xuf"), "idle", "dash", SubResource("AnimationNodeStateMachineTransition_t0kv0"), "dash", "idle", SubResource("AnimationNodeStateMachineTransition_ynkct"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_ycoar"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_vpc8c"), "walk", "dash", SubResource("AnimationNodeStateMachineTransition_olyej"), "dash", "walk", SubResource("AnimationNodeStateMachineTransition_wdwnl"), "idle", "die", SubResource("AnimationNodeStateMachineTransition_okq8g"), "dash", "die", SubResource("AnimationNodeStateMachineTransition_t1awi"), "die", "End", SubResource("AnimationNodeStateMachineTransition_cyrrw")]
-graph_offset = Vector2(66, 0)
+graph_offset = Vector2(11, 20)
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_pi4uw"]
 properties/0/path = NodePath(".:position")
@@ -539,4 +539,11 @@ text = "35/100
 "
 
 [node name="ServerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+editor_description = "don't forget to set authority to 1!"
 replication_config = SubResource("SceneReplicationConfig_p1sw3")
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://player/axe.tscn")
+spawn_path = NodePath("..")
+
+[connection signal="child_entered_tree" from="." to="." method="_on_child_entered_tree"]

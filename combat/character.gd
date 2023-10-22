@@ -7,25 +7,22 @@ extends CharacterBody2D
 @export var healthBar: HealthBar = null
 
 @export var effects: Array[BaseEffect]
-
-# DEPRECATED!!!
-@export var synced_id: int = -123: # id which is the same for all peers
-	set(value):
-		if synced_id != value:
-			GameManager.id2node[value] = self
-			synced_id = value
 		
 @export var forces: Array[String]
 var force_registry: ForceRegistry = null
 
+signal on_dead
+
 var is_dead: bool = false
+
+var move_speed_modifier: float = 1
 
 func _ready():
 	force_registry = get_parent()
 	if multiplayer.is_server():
 #		synced_id = GameManager.give_id()
 #		_set_synced_id.rpc(synced_id)
-			
+
 		for f in forces:
 			force_registry.register(get_path(), f)
 		
@@ -51,15 +48,25 @@ func receive_damage(d: Damage):
 	# might want to spawn number here
 	print("damage to ", debug_name, ":", d.calc_value())
 	health -= d.calc_value()
+	receive_damage_vfx.rpc(d.calc_value())
 	if healthBar != null:
 		healthBar.set_health.rpc(1.0 * health / maxHealth)
 	if health <= 0:
-		on_dead()
+		_on_dead()
 	
 	effects.append_array(d.effects)
 	# call event on_added on new effects
 	effects.sort_custom(func(x: BaseEffect, y: BaseEffect): 
 		return x.priority > y.priority)
+	
+	
+var damage_number_vfx: PackedScene = load("res://combat/damage_number.tscn")	
+@rpc("any_peer", "call_local", "unreliable", 6)
+func receive_damage_vfx(value: int):
+	var node = damage_number_vfx.instantiate()
+	node.value = value
+	add_child(node)
+
 
 var _interactable_in_range: Interactable
 func on_interaction_available(node: Interactable):
@@ -69,14 +76,11 @@ func on_interaction_unavailable(node: Interactable):
 	if _interactable_in_range == node:
 		_interactable_in_range = null
 
-func on_dead():
+func _on_dead():
 	print("%s: i am dead, too bad" % debug_name)
 	is_dead = true
 	if multiplayer.is_server():
 		for f in forces:
 			force_registry.unregister(get_path(), f)
+	on_dead.emit(self)
 			
-
-@rpc("any_peer", "call_remote", "reliable", 2)
-func _set_synced_id(id: int):
-	synced_id = id
