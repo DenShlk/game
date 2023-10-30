@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bow5ggtpixmu3"]
 
-[ext_resource type="Script" path="res://upgrades/damage_bonus.gd" id="1_jrcpm"]
+[ext_resource type="Script" path="res://upgrades/impls/damage_bonus.gd" id="1_jrcpm"]
 
 [node name="damage_bonus" type="Node"]
 script = ExtResource("1_jrcpm")

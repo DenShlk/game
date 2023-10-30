@@ -2,9 +2,9 @@
 
 [ext_resource type="PackedScene" uid="uid://qh7p37ds11w4" path="res://levels/floor.tscn" id="1_ch1b8"]
 [ext_resource type="Script" path="res://levels/random_mobs_level.gd" id="1_e7yd2"]
-[ext_resource type="PackedScene" uid="uid://bspsuw42q3mvi" path="res://levels/blocks/obstacle.tscn" id="2_cbt5t"]
 [ext_resource type="PackedScene" uid="uid://dub60ylmjx7w3" path="res://combat/mobs/boar.tscn" id="2_fof5i"]
 [ext_resource type="Script" path="res://combat/force_registry.gd" id="3_w1pg0"]
+[ext_resource type="TileSet" uid="uid://o5qvvpilbapu" path="res://tileset.tres" id="6_36jwv"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_idr1i"]
 properties/0/path = NodePath(".:position")
@@ -34,128 +34,6 @@ replication_config = SubResource("SceneReplicationConfig_idr1i")
 
 [node name="floor" parent="." instance=ExtResource("1_ch1b8")]
 
-[node name="obstacles" type="Node2D" parent="."]
-
-[node name="obstacle" parent="obstacles" instance=ExtResource("2_cbt5t")]
-position = Vector2(96, 64)
-
-[node name="obstacle2" parent="obstacles" instance=ExtResource("2_cbt5t")]
-position = Vector2(96, 128)
-
-[node name="obstacle3" parent="obstacles" instance=ExtResource("2_cbt5t")]
-position = Vector2(96, 192)
-
-[node name="obstacle4" parent="obstacles" instance=ExtResource("2_cbt5t")]
-position = Vector2(96, 256)
-
-[node name="obstacle5" parent="obstacles" instance=ExtResource("2_cbt5t")]
-position = Vector2(192, 224)
-
-[node name="obstacle6" parent="obstacles" instance=ExtResource("2_cbt5t")]
-position = Vector2(192, 192)
-
-[node name="obstacle7" parent="obstacles" instance=ExtResource("2_cbt5t")]
-position = Vector2(192, 160)
-
-[node name="obstacle8" parent="obstacles" instance=ExtResource("2_cbt5t")]
-position = Vector2(192, 128)
-
-[node name="obstacle9" parent="obstacles" instance=ExtResource("2_cbt5t")]
-position = Vector2(192, 96)
-
-[node name="obstacle10" parent="obstacles" instance=ExtResource("2_cbt5t")]
-position = Vector2(448, 64)
-
-[node name="obstacle11" parent="obstacles" instance=ExtResource("2_cbt5t")]
-position = Vector2(480, 64)
-
-[node name="obstacle12" parent="obstacles" instance=ExtResource("2_cbt5t")]
-position = Vector2(544, 64)
-
-[node name="obstacle13" parent="obstacles" instance=ExtResource("2_cbt5t")]
-position = Vector2(544, 96)
-
-[node name="obstacle14" parent="obstacles" instance=ExtResource("2_cbt5t")]
-position = Vector2(544, 160)
-
-[node name="obstacle40" parent="obstacles" instance=ExtResource("2_cbt5t")]
-position = Vector2(544, 128)
-
-[node name="obstacle15" parent="obstacles" instance=ExtResource("2_cbt5t")]
-position = Vector2(544, 256)
-
-[node name="obstacle25" parent="obstacles" instance=ExtResource("2_cbt5t")]
-position = Vector2(544, 224)
-
-[node name="obstacle26" parent="obstacles" instance=ExtResource("2_cbt5t")]
-position = Vector2(544, 192)
-
-[node name="obstacle28" parent="obstacles" instance=ExtResource("2_cbt5t")]
-position = Vector2(640, 192)
-
-[node name="obstacle29" parent="obstacles" instance=ExtResource("2_cbt5t")]
-position = Vector2(640, 224)
-
-[node name="obstacle30" parent="obstacles" instance=ExtResource("2_cbt5t")]
-position = Vector2(640, 256)
-
-[node name="obstacle31" parent="obstacles" instance=ExtResource("2_cbt5t")]
-position = Vector2(640, 352)
-
-[node name="obstacle32" parent="obstacles" instance=ExtResource("2_cbt5t")]
-position = Vector2(640, 320)
-
-[node name="obstacle33" parent="obstacles" instance=ExtResource("2_cbt5t")]
-position = Vector2(640, 288)
-
-[node name="obstacle34" parent="obstacles" instance=ExtResource("2_cbt5t")]
-position = Vector2(640, 0)
-
-[node name="obstacle35" parent="obstacles" instance=ExtResource("2_cbt5t")]
-position = Vector2(640, 32)
-
-[node name="obstacle36" parent="obstacles" instance=ExtResource("2_cbt5t")]
-position = Vector2(640, 64)
-
-[node name="obstacle37" parent="obstacles" instance=ExtResource("2_cbt5t")]
-position = Vector2(640, 160)
-
-[node name="obstacle38" parent="obstacles" instance=ExtResource("2_cbt5t")]
-position = Vector2(640, 128)
-
-[node name="obstacle39" parent="obstacles" instance=ExtResource("2_cbt5t")]
-position = Vector2(640, 96)
-
-[node name="obstacle16" parent="obstacles" instance=ExtResource("2_cbt5t")]
-position = Vector2(512, 64)
-
-[node name="obstacle22" parent="obstacles" instance=ExtResource("2_cbt5t")]
-position = Vector2(480, 256)
-
-[node name="obstacle23" parent="obstacles" instance=ExtResource("2_cbt5t")]
-position = Vector2(512, 256)
-
-[node name="obstacle17" parent="obstacles" instance=ExtResource("2_cbt5t")]
-position = Vector2(384, 96)
-
-[node name="obstacle20" parent="obstacles" instance=ExtResource("2_cbt5t")]
-position = Vector2(416, 256)
-
-[node name="obstacle27" parent="obstacles" instance=ExtResource("2_cbt5t")]
-position = Vector2(384, 256)
-
-[node name="obstacle21" parent="obstacles" instance=ExtResource("2_cbt5t")]
-position = Vector2(448, 256)
-
-[node name="obstacle24" parent="obstacles" instance=ExtResource("2_cbt5t")]
-position = Vector2(384, 224)
-
-[node name="obstacle18" parent="obstacles" instance=ExtResource("2_cbt5t")]
-position = Vector2(416, 64)
-
-[node name="obstacle19" parent="obstacles" instance=ExtResource("2_cbt5t")]
-position = Vector2(384, 64)
-
 [node name="mob_spawns" type="Node2D" parent="."]
 
 [node name="point" type="Node2D" parent="mob_spawns"]
@@ -168,165 +46,6 @@ position = Vector2(288, 96)
 position = Vector2(288, 256)
 
 [node name="boundary" type="Node2D" parent="."]
-
-[node name="obstacle" parent="boundary" instance=ExtResource("2_cbt5t")]
-position = Vector2(0, -32)
-
-[node name="obstacle2" parent="boundary" instance=ExtResource("2_cbt5t")]
-position = Vector2(32, -32)
-
-[node name="obstacle3" parent="boundary" instance=ExtResource("2_cbt5t")]
-position = Vector2(64, -32)
-
-[node name="obstacle4" parent="boundary" instance=ExtResource("2_cbt5t")]
-position = Vector2(96, -32)
-
-[node name="obstacle5" parent="boundary" instance=ExtResource("2_cbt5t")]
-position = Vector2(128, -32)
-
-[node name="obstacle6" parent="boundary" instance=ExtResource("2_cbt5t")]
-position = Vector2(160, -32)
-
-[node name="obstacle7" parent="boundary" instance=ExtResource("2_cbt5t")]
-position = Vector2(192, -32)
-
-[node name="obstacle8" parent="boundary" instance=ExtResource("2_cbt5t")]
-position = Vector2(224, -32)
-
-[node name="obstacle9" parent="boundary" instance=ExtResource("2_cbt5t")]
-position = Vector2(256, -32)
-
-[node name="obstacle10" parent="boundary" instance=ExtResource("2_cbt5t")]
-position = Vector2(288, -32)
-
-[node name="obstacle11" parent="boundary" instance=ExtResource("2_cbt5t")]
-position = Vector2(320, -32)
-
-[node name="obstacle12" parent="boundary" instance=ExtResource("2_cbt5t")]
-position = Vector2(352, -32)
-
-[node name="obstacle13" parent="boundary" instance=ExtResource("2_cbt5t")]
-position = Vector2(384, -32)
-
-[node name="obstacle14" parent="boundary" instance=ExtResource("2_cbt5t")]
-position = Vector2(416, -32)
-
-[node name="obstacle15" parent="boundary" instance=ExtResource("2_cbt5t")]
-position = Vector2(448, -32)
-
-[node name="obstacle16" parent="boundary" instance=ExtResource("2_cbt5t")]
-position = Vector2(480, -32)
-
-[node name="obstacle17" parent="boundary" instance=ExtResource("2_cbt5t")]
-position = Vector2(512, -32)
-
-[node name="obstacle18" parent="boundary" instance=ExtResource("2_cbt5t")]
-position = Vector2(544, -32)
-
-[node name="obstacle19" parent="boundary" instance=ExtResource("2_cbt5t")]
-position = Vector2(576, -32)
-
-[node name="obstacle42" parent="boundary" instance=ExtResource("2_cbt5t")]
-position = Vector2(640, -32)
-
-[node name="obstacle43" parent="boundary" instance=ExtResource("2_cbt5t")]
-position = Vector2(-32, 192)
-
-[node name="obstacle44" parent="boundary" instance=ExtResource("2_cbt5t")]
-position = Vector2(-32, 224)
-
-[node name="obstacle45" parent="boundary" instance=ExtResource("2_cbt5t")]
-position = Vector2(-32, 256)
-
-[node name="obstacle46" parent="boundary" instance=ExtResource("2_cbt5t")]
-position = Vector2(-32, 320)
-
-[node name="obstacle47" parent="boundary" instance=ExtResource("2_cbt5t")]
-position = Vector2(-32, 288)
-
-[node name="obstacle48" parent="boundary" instance=ExtResource("2_cbt5t")]
-position = Vector2(-32, 0)
-
-[node name="obstacle49" parent="boundary" instance=ExtResource("2_cbt5t")]
-position = Vector2(-32, 32)
-
-[node name="obstacle50" parent="boundary" instance=ExtResource("2_cbt5t")]
-position = Vector2(-32, 64)
-
-[node name="obstacle51" parent="boundary" instance=ExtResource("2_cbt5t")]
-position = Vector2(-32, 160)
-
-[node name="obstacle52" parent="boundary" instance=ExtResource("2_cbt5t")]
-position = Vector2(-32, 128)
-
-[node name="obstacle53" parent="boundary" instance=ExtResource("2_cbt5t")]
-position = Vector2(-32, 96)
-
-[node name="obstacle54" parent="boundary" instance=ExtResource("2_cbt5t")]
-position = Vector2(-32, -32)
-
-[node name="obstacle21" parent="boundary" instance=ExtResource("2_cbt5t")]
-position = Vector2(64, 352)
-
-[node name="obstacle22" parent="boundary" instance=ExtResource("2_cbt5t")]
-position = Vector2(96, 352)
-
-[node name="obstacle23" parent="boundary" instance=ExtResource("2_cbt5t")]
-position = Vector2(128, 352)
-
-[node name="obstacle39" parent="boundary" instance=ExtResource("2_cbt5t")]
-position = Vector2(-32, 352)
-
-[node name="obstacle40" parent="boundary" instance=ExtResource("2_cbt5t")]
-position = Vector2(0, 352)
-
-[node name="obstacle41" parent="boundary" instance=ExtResource("2_cbt5t")]
-position = Vector2(32, 352)
-
-[node name="obstacle24" parent="boundary" instance=ExtResource("2_cbt5t")]
-position = Vector2(160, 352)
-
-[node name="obstacle25" parent="boundary" instance=ExtResource("2_cbt5t")]
-position = Vector2(192, 352)
-
-[node name="obstacle26" parent="boundary" instance=ExtResource("2_cbt5t")]
-position = Vector2(224, 352)
-
-[node name="obstacle27" parent="boundary" instance=ExtResource("2_cbt5t")]
-position = Vector2(256, 352)
-
-[node name="obstacle28" parent="boundary" instance=ExtResource("2_cbt5t")]
-position = Vector2(288, 352)
-
-[node name="obstacle29" parent="boundary" instance=ExtResource("2_cbt5t")]
-position = Vector2(320, 352)
-
-[node name="obstacle30" parent="boundary" instance=ExtResource("2_cbt5t")]
-position = Vector2(352, 352)
-
-[node name="obstacle31" parent="boundary" instance=ExtResource("2_cbt5t")]
-position = Vector2(384, 352)
-
-[node name="obstacle32" parent="boundary" instance=ExtResource("2_cbt5t")]
-position = Vector2(416, 352)
-
-[node name="obstacle33" parent="boundary" instance=ExtResource("2_cbt5t")]
-position = Vector2(448, 352)
-
-[node name="obstacle34" parent="boundary" instance=ExtResource("2_cbt5t")]
-position = Vector2(480, 352)
-
-[node name="obstacle35" parent="boundary" instance=ExtResource("2_cbt5t")]
-position = Vector2(512, 352)
-
-[node name="obstacle36" parent="boundary" instance=ExtResource("2_cbt5t")]
-position = Vector2(544, 352)
-
-[node name="obstacle37" parent="boundary" instance=ExtResource("2_cbt5t")]
-position = Vector2(576, 352)
-
-[node name="obstacle38" parent="boundary" instance=ExtResource("2_cbt5t")]
-position = Vector2(608, 352)
 
 [node name="player_spawn" type="Node2D" parent="."]
 position = Vector2(32, 160)
@@ -345,3 +64,9 @@ navigation_polygon = SubResource("NavigationPolygon_nhpgg")
 
 [node name="RewardPosition" type="Node2D" parent="."]
 position = Vector2(304, 176)
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource("6_36jwv")
+cell_quadrant_size = 64
+format = 2
+layer_0/tile_data = PackedInt32Array(-65536, 3, 0, -65535, 3, 0, -65534, 3, 0, -65533, 3, 0, -65532, 3, 0, -65531, 3, 0, -65530, 3, 0, -65529, 3, 0, -65528, 3, 0, -65527, 3, 0, -65526, 3, 0, -65525, 3, 0, -65524, 3, 0, -65523, 3, 0, -65522, 3, 0, -65521, 3, 0, -65520, 3, 0, -65519, 3, 0, -65518, 3, 0, -65517, 3, 0, -65516, 3, 0, -1, 3, 0, 65535, 3, 0, 131071, 3, 0, 196607, 3, 0, 262143, 3, 0, 327679, 3, 0, 393215, 3, 0, 458751, 3, 0, 524287, 3, 0, 589823, 3, 0, 655359, 3, 0, 720895, 3, 0, 786431, 3, 0, 720896, 3, 0, 720897, 3, 0, 720898, 3, 0, 720899, 3, 0, 720900, 3, 0, 720901, 3, 0, 720902, 3, 0, 720903, 3, 0, 720904, 3, 0, 720905, 3, 0, 720906, 3, 0, 720907, 3, 0, 720908, 3, 0, 720909, 3, 0, 720910, 3, 0, 720911, 3, 0, 720912, 3, 0, 720913, 3, 0, 720914, 3, 0, 720915, 3, 0, 20, 3, 0, 65556, 3, 0, 131092, 3, 0, 196628, 3, 0, 262164, 3, 0, 327700, 3, 0, 393236, 3, 0, 458772, 3, 0, 524308, 3, 0, 589844, 3, 0, 655380, 3, 0, 720916, 3, 0, 524291, 3, 65536, 393219, 3, 65536, 262147, 3, 65536, 131075, 3, 65536, 196614, 3, 65536, 262150, 3, 65536, 327686, 3, 65536, 393222, 3, 65536, 458758, 3, 65536, 458764, 3, 65536, 524300, 3, 65536, 524301, 3, 65536, 524302, 3, 65536, 524303, 3, 65536, 524304, 3, 65536, 524305, 3, 65536, 458769, 3, 65536, 393233, 3, 65536, 327697, 3, 65536, 262161, 3, 65536, 196625, 3, 65536, 131089, 3, 65536, 131088, 3, 65536, 131087, 3, 65536, 131086, 3, 65536, 131085, 3, 65536, 131084, 3, 65536, 196620, 3, 65536)

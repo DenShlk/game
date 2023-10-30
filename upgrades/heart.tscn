@@ -71,6 +71,8 @@ monitorable = false
 shape = SubResource("CircleShape2D_ssq7e")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 2
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(-4, 1)

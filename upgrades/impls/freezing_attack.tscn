@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cu18n6vqbg66u"]
+
+[ext_resource type="Script" path="res://upgrades/impls/freezing_attack.gd" id="1_m35ws"]
+
+[node name="freezing_attack" type="Node"]
+script = ExtResource("1_m35ws")

@@ -14,4 +14,4 @@ class DamageBonusEffect:
 		return d
 
 func on_player_spawn(player: PlayerCharacter):
-	player.effects.append(DamageBonusEffect.new(delta))
+	player.add_effect(DamageBonusEffect.new(delta))

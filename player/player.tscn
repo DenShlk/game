@@ -429,9 +429,19 @@ properties/0/path = NodePath(".:health")
 properties/0/spawn = true
 properties/0/sync = true
 properties/0/watch = false
+properties/1/path = NodePath(".:modulate")
+properties/1/spawn = true
+properties/1/sync = true
+properties/1/watch = false
+properties/2/path = NodePath(".:move_speed_modifier")
+properties/2/spawn = true
+properties/2/sync = true
+properties/2/watch = false
 
 [node name="PlayerBody" type="CharacterBody2D" node_paths=PackedStringArray("sprite")]
 z_index = 10
+collision_layer = 257
+collision_mask = 7
 platform_floor_layers = 4294967040
 script = ExtResource("1_va6nm")
 sprite = NodePath("CharacterSprite2D")
@@ -547,3 +557,4 @@ _spawnable_scenes = PackedStringArray("res://player/axe.tscn")
 spawn_path = NodePath("..")
 
 [connection signal="child_entered_tree" from="." to="." method="_on_child_entered_tree"]
+[connection signal="timeout" from="DashDuration" to="." method="_on_dash_duration_timeout"]

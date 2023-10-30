@@ -474,6 +474,7 @@ offset = Vector2(0, -13)
 
 [node name="DirectHitArea" type="Area2D" parent="Origin/Axe"]
 collision_layer = 0
+collision_mask = 256
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Origin/Axe/DirectHitArea"]
 position = Vector2(0, -22)

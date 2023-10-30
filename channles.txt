@@ -12,3 +12,8 @@ Orders of visibility:
 0-10: game objects (physical)
 30-40:in-game ui
 
+Collision layers:
+	1: bodies
+	2: static bodies
+	2: walls (must stop anything from getting out)
+	9: hitboxes

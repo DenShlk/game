@@ -13,3 +13,5 @@ func _ready():
 		# cannot connect => join
 		name_label.text = "enjoiner"
 		lobby._on_join_button_down()
+	await get_tree().create_timer(10).timeout
+	_instance_socket.stop()

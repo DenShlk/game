@@ -21,7 +21,6 @@ func create_character() -> CombatCharacter:
 	character.health = finishedWithHealth
 	character.maxHealth = maxHealth
 	character.debug_name = nick
-	character.effects = []
 	character.set_multiplayer_authority(id)
 	# may be needs to happen after character is ready
 	for u in upgrades:
@@ -51,8 +50,11 @@ func _on_multiplayer_synchronizer_synchronized():
 		
 @onready var upgrades_root := $upgrades
 
-func add_upgrade(upgrade: Upgrade):
+func add_upgrade(upgrade: Upgrade, player_instance: PlayerCharacter = null):
 	upgrades_root.add_child(upgrade, true)
+	if player_instance:
+		upgrade.on_player_spawn(player_instance)
+#	upgrade.on_player_spawn()
 
 func _on_upgrades_child_entered_tree(node):
 	if multiplayer.is_server():

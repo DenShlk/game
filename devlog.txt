@@ -116,8 +116,8 @@ I feel like I need to make some goals or there will be too much question i don't
 Alright, we need a new goal!
 Next step is to have somewhat playable experience... 
 1) have weapon upgrades and visual indicators that they work (like damage numbers!) - done
-2) do not loose multiplayer workability for too long! - lost it with shop :(
-3+-) multiple levels, enemies applying effects (like stun or something)
+2) do not loose multiplayer workability for too long! - lost it with shop :( - fixed, boo
+3+-) multiple levels, enemies applying effects (like stun or something) - no enemies, but copy pasting levels is easy now
 4+) shop with upgrades! - done
 
 levels:
@@ -168,6 +168,24 @@ some thoughts:
 TODO: interactable captions (quite simple, really)
 
 ok, effects! let's do frost to begin with
-1) it should be indicated near the health bar
+1) it should be indicated near the health bar -> i did color modulate of player, think it's ok for now
 2) should somehow slow down characters... => we need to make speed_modifier variable to do that
 should it be in character or in each of the things... guess the former because it's so universal
+
+i really don't like those strange errors:
+	create_character(): Condition "!valid" is true. Continuing.
+	and it often complains about infinite recursion where there is no recursion! - https://github.com/godotengine/godot/issues/76019
+
+1) seems like using move_and_collide(velocity * delta) is better then slide
+2) characters are moving when you dash through them because they are not agreeing to server calculations - will be fixed when we move input to server
+
+todo: check what multiplayer.server_relay is and enable it if needed
+
+ok, another set of goals achieved, congrats to everyone.
+game is not playable though, it feels like... simply bad?
+i think we need to work on weapon and enemies next.
+I guess it would be easier to steal some ranged weapon mechanics, but on the other hand i believe that short range weapons should be priority...
+At least I am quite sure i need to rework applying damage with instant shapecasts.
+
+Next plan:
+	1) instant damage

@@ -1,17 +1,19 @@
-[gd_scene load_steps=14 format=3 uid="uid://c43ei3eqx7h6c"]
+[gd_scene load_steps=16 format=3 uid="uid://c43ei3eqx7h6c"]
 
-[ext_resource type="Script" path="res://levels/base_level.gd" id="1_nx2gt"]
+[ext_resource type="Script" path="res://levels/starting_area.gd" id="1_pubn4"]
 [ext_resource type="Script" path="res://levels/floor.gd" id="2_hug42"]
 [ext_resource type="Texture2D" uid="uid://ceejs4pn8c48" path="res://sprites/grass-tile.png" id="3_pekao"]
 [ext_resource type="Script" path="res://combat/force_registry.gd" id="4_fd60n"]
 [ext_resource type="PackedScene" uid="uid://1stgfyguwfsc" path="res://levels/blocks/tablet/tablet.tscn" id="5_g4gv7"]
 [ext_resource type="PackedScene" uid="uid://dc6by5lh1gfk0" path="res://levels/blocks/portal.tscn" id="6_wwd2q"]
-[ext_resource type="PackedScene" uid="uid://bqeem1ts27xn" path="res://levels/shop_area.tscn" id="8_m84xw"]
+[ext_resource type="PackedScene" uid="uid://nqioqi5yi0lr" path="res://levels/shop_area.tscn" id="8_m84xw"]
 [ext_resource type="PackedScene" uid="uid://c383vqywcux21" path="res://upgrades/upgrade_interactable.tscn" id="9_334h0"]
-[ext_resource type="PackedScene" uid="uid://bow5ggtpixmu3" path="res://upgrades/damage_bonus.tscn" id="10_r2ds2"]
-[ext_resource type="PackedScene" uid="uid://dubjq3n4e3616" path="res://levels/blocks/heart.tscn" id="11_87d67"]
+[ext_resource type="PackedScene" uid="uid://bow5ggtpixmu3" path="res://upgrades/impls/damage_bonus.tscn" id="10_r2ds2"]
+[ext_resource type="PackedScene" uid="uid://dubjq3n4e3616" path="res://upgrades/heart.tscn" id="11_87d67"]
 [ext_resource type="PackedScene" uid="uid://t0a5r3bsmjce" path="res://levels/blocks/next_level_portal.tscn" id="12_klmu0"]
 [ext_resource type="PackedScene" uid="uid://coy31wjh4tose" path="res://levels/blocks/shop_stand.tscn" id="12_we61j"]
+[ext_resource type="PackedScene" uid="uid://gilvk78lbe06" path="res://levels/blocks/wall.tscn" id="13_34gdt"]
+[ext_resource type="PackedScene" uid="uid://cu18n6vqbg66u" path="res://upgrades/impls/freezing_attack.tscn" id="14_n4wvo"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_vso0h"]
 properties/0/path = NodePath(".:position")
@@ -20,7 +22,7 @@ properties/0/sync = false
 properties/0/watch = true
 
 [node name="starting_area" type="Node2D"]
-script = ExtResource("1_nx2gt")
+script = ExtResource("1_pubn4")
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://player/player.tscn")
@@ -62,3 +64,10 @@ position = Vector2(237, 67)
 
 [node name="next_level_portal" parent="." instance=ExtResource("12_klmu0")]
 position = Vector2(408, 181)
+
+[node name="wall" parent="." instance=ExtResource("13_34gdt")]
+position = Vector2(147, 168)
+
+[node name="UpgradeInteractable2" parent="." instance=ExtResource("9_334h0")]
+position = Vector2(117, 267)
+upgrade_scene = ExtResource("14_n4wvo")

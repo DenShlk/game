@@ -2,13 +2,15 @@ class_name PlayerCharacter
 extends CombatCharacter
 
 @export var speed: float = 250
-@export var dash_speed: float = speed * 2.25
-@export var dash_duration: float = 0.2
+@export var dash_speed: float = speed * 3
+@export var dash_distance: float = 110
 @export var dash_cooldown: float = 1.0
 
 @export var weapon: BaseWeapon = null
 
 @export var sprite: Sprite2D
+
+@onready var dash_duration: float = dash_distance / dash_speed
 
 @onready var dash_cooldown_timer = $DashCooldown
 @onready var dash_duration_timer = $DashDuration
@@ -69,6 +71,7 @@ func _process_movement():
 	if dash_cooldown_timer.is_stopped() and Input.get_action_strength("dash") != 0:
 		dash_cooldown_timer.start(dash_cooldown)
 		dash_duration_timer.start(dash_duration)
+		toggle_collisions(false)
 	if !dash_duration_timer.is_stopped():
 		velocity = _last_moving_direction * dash_speed * self.move_speed_modifier
 		state_machine.travel("dash")
@@ -81,13 +84,15 @@ func _process_movement():
 	
 
 func _physics_process(delta):
+	super(delta)
+	
 	if !is_multiplayer_authority():
 		return
 	if is_dead:
 		return
 	
 	_get_input()
-	move_and_slide()
+	move_and_collide(velocity * delta)
 	
 func _on_dead():
 	super()
@@ -99,6 +104,13 @@ func _on_dead():
 #	player_info.destroy_character(self)
 #	var level: BaseLevel = LevelLoader.FindLevel(load("res://levels/starting_area.tscn"))
 #	LevelLoader.MovePlayer(player_info.create_character(), level)
+	
+	
+func toggle_collisions(enable: bool):
+	set_collision_layer_value(1, enable)
+	set_collision_mask_value(1, enable)
+	set_collision_mask_value(2, enable)
+	set_collision_layer_value(9, enable)
 	
 	
 func enter_ui(ui: Control):
@@ -114,3 +126,7 @@ func leave_ui(ui: Control):
 func _on_child_entered_tree(node):
 	if node is BaseWeapon:
 		weapon = node
+
+
+func _on_dash_duration_timeout():
+	toggle_collisions(true)

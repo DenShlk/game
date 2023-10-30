@@ -5,8 +5,10 @@ extends CharacterBody2D
 @export var maxHealth = 100
 @export var health = 100
 @export var healthBar: HealthBar = null
+@export var move_speed_modifier: float = 1
 
-@export var effects: Array[BaseEffect]
+# i want to see it, but don't modify it manually (use add_effect())
+@export var _effects: Array[BaseEffect]
 		
 @export var forces: Array[String]
 var force_registry: ForceRegistry = null
@@ -14,8 +16,6 @@ var force_registry: ForceRegistry = null
 signal on_dead
 
 var is_dead: bool = false
-
-var move_speed_modifier: float = 1
 
 func _ready():
 	force_registry = get_parent()
@@ -25,12 +25,32 @@ func _ready():
 
 		for f in forces:
 			force_registry.register(get_path(), f)
+			
+func _physics_process(delta):
+	if !multiplayer.is_server():
+		return
+	_process_effects()
+	
+func _process_effects():
+	var new_effects: Array[BaseEffect] = []
+	for e in _effects:
+		if e.ended:
+			e.on_removed(self)
+		else:
+			new_effects.append(e)
+	_effects = new_effects
 		
+func add_effect(effect: BaseEffect):
+	_effects.append(effect)
+	effect.on_added(self)
+	_effects.sort_custom(func(x: BaseEffect, y: BaseEffect): 
+		return x.priority > y.priority)
+
 
 func apply_damage(d: Damage) -> Damage:
 	assert(multiplayer.is_server(), "must be server to do damage")
 	
-	for e in effects:
+	for e in _effects:
 		if e.has_method('owner_applies_damage'):
 			d = e.owner_applies_damage(d)
 	return d
@@ -41,7 +61,7 @@ func receive_damage(d: Damage):
 	if is_dead:
 		return
 	
-	for e in effects:
+	for e in _effects:
 		if e.has_method('target_receives_damage'):
 			d = e.target_receives_damage(d)
 			
@@ -54,10 +74,8 @@ func receive_damage(d: Damage):
 	if health <= 0:
 		_on_dead()
 	
-	effects.append_array(d.effects)
-	# call event on_added on new effects
-	effects.sort_custom(func(x: BaseEffect, y: BaseEffect): 
-		return x.priority > y.priority)
+	for e in d.effects:
+		add_effect(e)
 	
 	
 var damage_number_vfx: PackedScene = load("res://combat/damage_number.tscn")	

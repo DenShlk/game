@@ -28,13 +28,13 @@ func _process(delta):
 		sprite.flip_h = position.direction_to(target).x > 0
 
 var _last_state: String = ""
-func _physics_process(_delta):
+func _physics_process(delta):
+	super(delta)
 	if !multiplayer.is_server():
 		return
 	if is_dead:
 		return
 	
-	move_and_slide()
 	var to_target := to_local(navigation.get_next_path_position())
 	
 	var state_changed: bool = _last_state != state_machine.get_current_node()
@@ -71,6 +71,7 @@ func _physics_process(_delta):
 				rest_timer.start()
 				hitbox.toggle(false)
 	
+	move_and_collide(velocity * delta)
 	# print(_last_state, ' - ', velocity)
 		
 	

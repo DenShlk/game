@@ -75,6 +75,8 @@ collision_layer = 0
 shape = SubResource("CircleShape2D_o4l3s")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 2
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 shape = SubResource("CircleShape2D_h5sub")

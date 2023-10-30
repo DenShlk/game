@@ -9,5 +9,5 @@ func _interact(character: CombatCharacter):
 			return
 		_used = true
 
-		character.player_info.add_upgrade(upgrade_scene.instantiate())
+		character.player_info.add_upgrade(upgrade_scene.instantiate(), character)
 		queue_free()
